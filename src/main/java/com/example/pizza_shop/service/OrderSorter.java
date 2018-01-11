@@ -18,10 +18,18 @@ public class OrderSorter {
     public Order readOrderFile() throws IOException {
         String orderFile = System.getProperty("orderFile");
         List<String> items = FileUtils.readLines(new File(orderFile), UTF_8);
-        if(items.size() == 0) {
+        if(items.isEmpty()) {
             throw new InvalidFileException(new File(orderFile), "File is empty");
         }
         Order order = new Order(items.get(0));
+        addToppings(items, order);
+        if(order.getToppings().isEmpty()) {
+            throw new InvalidFileException(new File(orderFile), "No toppings present");
+        }
+        return order;
+    }
+
+    private void addToppings(List<String> items, Order order) {
         for (int i = 1; i < items.size(); i++) {
             String line = items.get(i);
             if(StringUtils.isBlank(line)) {
@@ -31,10 +39,6 @@ public class OrderSorter {
             Topping topping = toppingBuilder.createTopping();
             order.getToppings().add(topping);
         }
-        if(order.getToppings().isEmpty()) {
-            throw new InvalidFileException(new File(orderFile), "No toppings present");
-        }
-        return order;
     }
 
 }
