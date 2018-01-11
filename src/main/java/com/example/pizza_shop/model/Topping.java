@@ -1,8 +1,11 @@
 package com.example.pizza_shop.model;
 
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Topping {
+
+    private static final String DATE_PATTERN = "MM/dd/yyyy hh:mm a";
 
     private final String name;
     private final Date addedOn;
@@ -24,7 +27,8 @@ public class Topping {
         StringBuilder builder = new StringBuilder();
         builder.append(name);
         if (addedOn != null) {
-            builder.append(addedOn);
+            SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_PATTERN);
+            builder.append(dateFormat.format(addedOn));
         }
         return builder.toString();
     }

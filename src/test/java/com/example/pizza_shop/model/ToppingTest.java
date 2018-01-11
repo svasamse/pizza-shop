@@ -17,7 +17,7 @@ public class ToppingTest {
         //act
         String actual = topping.toHumanReadableFormat();
 
-        assertThat(actual).containsPattern("bread Sat Jan 17 .*? 1970");
+        assertThat(actual).containsPattern("bread 01/17/1970 ..:.. (AM|PM)");
     }
 
     @Test

@@ -14,7 +14,11 @@ The application will arrange the list in correct order.
     * Followed by Epoch timestamp
     * End of line
 * If there are any line items not following the above pattern, then the process will quit with an error
-* All timestamps will be displayed in the local timezone only
+* All timestamps will be displayed in the local timezone only with the format `MM/dd/yyyy hh:mi a`
+```
+    01/21/2018 07:47 PM 
+    01/17/2018 11:53 AM
+```
 
 ## Running the program
 To build the project run the following command in the command line
