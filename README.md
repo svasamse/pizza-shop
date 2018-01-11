@@ -5,6 +5,7 @@ Pizza shop receives order and saves them in a text file however they are not in 
 The application will arrange the list in correct order. 
 
 ## Assumptions
+* The file should be in `UTF-8` format only
 * The items will be sorted based on the topping name
     * When there are more than one topping with the same name, then they will be ordered by the timestamp
 * The first line in the file will be considered as a header and will not be included for sorting
