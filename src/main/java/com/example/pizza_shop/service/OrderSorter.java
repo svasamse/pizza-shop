@@ -4,27 +4,29 @@ import com.example.pizza_shop.exception.InvalidFileException;
 import com.example.pizza_shop.model.Order;
 import com.example.pizza_shop.model.Topping;
 import com.example.pizza_shop.model.ToppingBuilder;
-import org.apache.commons.io.FileUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
 import java.util.List;
 
 public class OrderSorter {
 
-    private static final String UTF_8 = "UTF-8";
-
-    public Order readOrderFile() throws IOException {
+    public Order readOrder() throws IOException {
         String orderFile = System.getProperty("orderFile");
-        List<String> items = FileUtils.readLines(new File(orderFile), UTF_8);
+        Reader inputStream = new FileReader(orderFile);
+        return readOrder(inputStream);
+    }
+
+    public Order readOrder(Reader inputStream) throws IOException {
+        List<String> items = IOUtils.readLines(inputStream);
         if(items.isEmpty()) {
-            throw new InvalidFileException(new File(orderFile), "File is empty");
+            throw new InvalidFileException("File is empty");
         }
         Order order = new Order(items.get(0));
         addToppings(items, order);
         if(order.getToppings().isEmpty()) {
-            throw new InvalidFileException(new File(orderFile), "No toppings present");
+            throw new InvalidFileException("No toppings present");
         }
         return order;
     }
