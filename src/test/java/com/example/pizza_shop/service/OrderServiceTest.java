@@ -2,8 +2,8 @@ package com.example.pizza_shop.service;
 
 import com.example.pizza_shop.exception.InvalidFileException;
 import com.example.pizza_shop.model.Order;
-import com.example.pizza_shop.model.Topping;
-import com.example.pizza_shop.model.ToppingBuilder;
+import com.example.pizza_shop.model.Pizza;
+import com.example.pizza_shop.model.PizzaBuilder;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -34,6 +34,7 @@ public class OrderServiceTest {
     @After
     public void tearDown() throws Exception {
         System.clearProperty("orderInputFile");
+        System.clearProperty("orderOutputFile");
     }
 
     @Test
@@ -42,7 +43,7 @@ public class OrderServiceTest {
         Order actual = orderService.readOrder();
 
         assertThat(actual.getHeader()).isEqualTo("Order\t\ttime");
-        assertThat(actual.getToppings()).hasSize(9);
+        assertThat(actual.getPizzas()).hasSize(9);
 
     }
 
@@ -85,11 +86,11 @@ public class OrderServiceTest {
         Order order = new Order("header");
         StringWriter writer = new StringWriter();
 
-        Topping veggie = new ToppingBuilder("Veggie\t\t1474295087").createTopping();
-        order.getToppings().add(veggie);
+        Pizza veggie = new PizzaBuilder("Veggie\t\t1474295087").createPizza();
+        order.getPizzas().add(veggie);
 
-        Topping meat = new ToppingBuilder("Meat\t\t1506176687").createTopping();
-        order.getToppings().add(meat);
+        Pizza meat = new PizzaBuilder("Meat\t\t1506176687").createPizza();
+        order.getPizzas().add(meat);
 
         //act
         orderService.writeOrder(order, writer);
@@ -106,11 +107,11 @@ public class OrderServiceTest {
     public void writeOrderToFile() throws Exception {
         Order order = new Order("header");
 
-        Topping veggie = new ToppingBuilder("Veggie\t\t1474295087").createTopping();
-        order.getToppings().add(veggie);
+        Pizza veggie = new PizzaBuilder("Veggie\t\t1474295087").createPizza();
+        order.getPizzas().add(veggie);
 
-        Topping meat = new ToppingBuilder("Meat\t\t1506176687").createTopping();
-        order.getToppings().add(meat);
+        Pizza meat = new PizzaBuilder("Meat\t\t1506176687").createPizza();
+        order.getPizzas().add(meat);
 
         //act
         orderService.writeOrder(order);

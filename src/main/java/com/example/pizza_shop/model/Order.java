@@ -6,7 +6,7 @@ import java.util.List;
 public class Order {
 
     private final String header;
-    private List<Topping> toppings = new ArrayList<Topping>(0);
+    private List<Pizza> pizzas = new ArrayList<Pizza>(0);
 
     public Order(String header) {
         this.header = header;
@@ -16,11 +16,11 @@ public class Order {
         return header;
     }
 
-    public List<Topping> getToppings() {
-        return toppings;
+    public List<Pizza> getPizzas() {
+        return pizzas;
     }
 
-    public void setToppings(List<Topping> toppings) {
-        this.toppings = toppings;
+    public void setPizzas(List<Pizza> pizzas) {
+        this.pizzas = pizzas;
     }
 }

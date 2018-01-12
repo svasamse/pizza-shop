@@ -6,26 +6,26 @@ import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ToppingTest {
+public class PizzaTest {
 
-    private Topping topping;
+    private Pizza pizza;
 
     @Test
     public void toHumanReadableFormat() throws Exception {
-        topping = new Topping("bread ", new Date(1477491887L));
+        pizza = new Pizza("bread ", new Date(1477491887L));
 
         //act
-        String actual = topping.toHumanReadableFormat();
+        String actual = pizza.toHumanReadableFormat();
 
         assertThat(actual).containsPattern("bread 01/17/1970 ..:.. (AM|PM)");
     }
 
     @Test
     public void toHumanReadableFormatWhenDateIsNull() throws Exception {
-        topping = new Topping("bread ", null);
+        pizza = new Pizza("bread ", null);
 
         //act
-        String actual = topping.toHumanReadableFormat();
+        String actual = pizza.toHumanReadableFormat();
 
         assertThat(actual).isEqualTo("bread ");
     }

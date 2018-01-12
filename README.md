@@ -7,8 +7,8 @@ The application will arrange the list in correct order.
 ## Assumptions
 * The file should be in `UTF-8` format only
 * The program will be executed using Java 7 and over only
-* The items will be sorted based on the topping name
-    * When there are more than one topping with the same name, then they will be ordered by the timestamp
+* The items will be sorted based on the pizza name
+    * When there are more than one pizza with the same name, then they will be ordered by the timestamp
 * The first line in the file will be considered as a header and will not be included for sorting
 * The line items in the file other than the header will need to be in the following format
     * Any number of alphanumeric characters including space(s)
@@ -28,10 +28,10 @@ The application is broadly classified in to the following packages.
 * service - All data manipulation logic will be handled by the class(es) defined in this package
 * exception - All application related exceptions are defined here
 
-The process of sorting the toppings is as follows.
-* Read the toppings related to the order from the given file and convert it into an `Order` object
-* Sort the collected toppings based on the name, and time the topping was added (in case the same topping has been added more than once)
-* The sorted toppings for the order will then be outputted to a file
+The process of sorting the pizzas is as follows.
+* Read the pizzas related to the order from the given file and convert it into an `Order` object
+* Sort the collected pizzas based on the name, and time the pizza was added (in case the same pizza has been added more than once)
+* The sorted pizzas for the order will then be outputted to a file
 
 ## Running the program
 To build the project run the following command in the command line

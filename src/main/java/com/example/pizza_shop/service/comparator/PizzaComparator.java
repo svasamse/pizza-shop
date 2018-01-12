@@ -1,12 +1,12 @@
 package com.example.pizza_shop.service.comparator;
 
-import com.example.pizza_shop.model.Topping;
+import com.example.pizza_shop.model.Pizza;
 import org.apache.commons.lang3.builder.CompareToBuilder;
 
 import java.util.Comparator;
 
-public class ToppingComparator implements Comparator<Topping>{
-    public int compare(Topping lhs, Topping rhs) {
+public class PizzaComparator implements Comparator<Pizza>{
+    public int compare(Pizza lhs, Pizza rhs) {
         if(lhs == null){
             return -1;
         }

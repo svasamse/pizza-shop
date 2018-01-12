@@ -1,6 +1,6 @@
 package com.example.pizza_shop.service.comparator;
 
-import com.example.pizza_shop.model.Topping;
+import com.example.pizza_shop.model.Pizza;
 import org.apache.commons.lang3.time.DateUtils;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,63 +9,63 @@ import java.util.Date;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-public class ToppingComparatorTest {
+public class PizzaComparatorTest {
 
-    private ToppingComparator comparator;
+    private PizzaComparator comparator;
     private Date now;
 
     @Before
     public void setUp() throws Exception {
-        comparator = new ToppingComparator();
+        comparator = new PizzaComparator();
         now = new Date();
     }
 
     @Test
     public void compareWhenLhsIsNull() throws Exception {
-        int actual = comparator.compare(null, new Topping("topping", now));
+        int actual = comparator.compare(null, new Pizza("pizza", now));
 
         assertThat(actual).isEqualTo(-1);
     }
 
     @Test
     public void compareWhenRhsIsNull() throws Exception {
-        int actual = comparator.compare(new Topping("topping", now), null);
+        int actual = comparator.compare(new Pizza("pizza", now), null);
 
         assertThat(actual).isEqualTo(1);
     }
 
     @Test
     public void compareWhenLhsNameIsNull() throws Exception {
-        int actual = comparator.compare(new Topping(null, now), new Topping("topping", now));
+        int actual = comparator.compare(new Pizza(null, now), new Pizza("pizza", now));
 
         assertThat(actual).isEqualTo(-1);
     }
 
     @Test
     public void compareWhenRhsNameIsNull() throws Exception {
-        int actual = comparator.compare(new Topping("topping", now), new Topping(null, now));
+        int actual = comparator.compare(new Pizza("pizza", now), new Pizza(null, now));
 
         assertThat(actual).isEqualTo(1);
     }
 
     @Test
     public void compareWhenLhsDateIsNull() throws Exception {
-        int actual = comparator.compare(new Topping("topping", null), new Topping("topping", now));
+        int actual = comparator.compare(new Pizza("pizza", null), new Pizza("pizza", now));
 
         assertThat(actual).isEqualTo(-1);
     }
 
     @Test
     public void compareWhenRhsDateIsNull() throws Exception {
-        int actual = comparator.compare(new Topping("topping", now), new Topping("topping", null));
+        int actual = comparator.compare(new Pizza("pizza", now), new Pizza("pizza", null));
 
         assertThat(actual).isEqualTo(1);
     }
 
     @Test
-    public void compareForDifferentToppingNames() throws Exception {
-        Topping veggie = new Topping("veggie", now);
-        Topping meat = new Topping("meat", now);
+    public void compareForDifferentNames() throws Exception {
+        Pizza veggie = new Pizza("veggie", now);
+        Pizza meat = new Pizza("meat", now);
 
         //act
         int actual = comparator.compare(veggie, meat);
@@ -74,10 +74,10 @@ public class ToppingComparatorTest {
     }
 
     @Test
-    public void compareForSameToppingNamesWithDifferentDates() throws Exception {
+    public void compareForSameNamesWithDifferentDates() throws Exception {
         Date oneHourAgo = DateUtils.addHours(now, -1);
-        Topping veggie1 = new Topping("veggie", oneHourAgo);
-        Topping veggie2 = new Topping("veggie", now);
+        Pizza veggie1 = new Pizza("veggie", oneHourAgo);
+        Pizza veggie2 = new Pizza("veggie", now);
 
         //act
         int actual = comparator.compare(veggie1, veggie2);
@@ -86,9 +86,9 @@ public class ToppingComparatorTest {
     }
 
     @Test
-    public void compareForSameToppingNamesWithSameDates() throws Exception {
-        Topping veggie1 = new Topping("veggie", now);
-        Topping veggie2 = new Topping("veggie", now);
+    public void compareForSameNamesWithSameDates() throws Exception {
+        Pizza veggie1 = new Pizza("veggie", now);
+        Pizza veggie2 = new Pizza("veggie", now);
 
         //act
         int actual = comparator.compare(veggie1, veggie2);

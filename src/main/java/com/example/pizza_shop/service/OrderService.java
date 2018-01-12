@@ -2,9 +2,9 @@ package com.example.pizza_shop.service;
 
 import com.example.pizza_shop.exception.InvalidFileException;
 import com.example.pizza_shop.model.Order;
-import com.example.pizza_shop.model.Topping;
-import com.example.pizza_shop.model.ToppingBuilder;
-import com.example.pizza_shop.service.comparator.ToppingComparator;
+import com.example.pizza_shop.model.Pizza;
+import com.example.pizza_shop.model.PizzaBuilder;
+import com.example.pizza_shop.service.comparator.PizzaComparator;
 import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -28,9 +28,9 @@ public class OrderService {
             throw new InvalidFileException("File is empty");
         }
         Order order = new Order(items.get(0));
-        addToppings(items, order);
-        if(CollectionUtils.isEmpty(order.getToppings())) {
-            throw new InvalidFileException("No toppings present");
+        addPizzas(items, order);
+        if(CollectionUtils.isEmpty(order.getPizzas())) {
+            throw new InvalidFileException("No pizzas present");
         }
         return order;
     }
@@ -47,23 +47,23 @@ public class OrderService {
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(writer); PrintWriter printWriter = new PrintWriter(bufferedWriter)) {
             printWriter.println(order.getHeader());
-            List<Topping> toppings = order.getToppings();
-            Collections.sort(toppings, new ToppingComparator());
-            for (Topping topping : toppings) {
-                printWriter.println(topping.toHumanReadableFormat());
+            List<Pizza> pizzas = order.getPizzas();
+            Collections.sort(pizzas, new PizzaComparator());
+            for (Pizza pizza : pizzas) {
+                printWriter.println(pizza.toHumanReadableFormat());
             }
         }
     }
 
-    private void addToppings(List<String> items, Order order) {
+    private void addPizzas(List<String> items, Order order) {
         for (int i = 1; i < items.size(); i++) {
             String line = items.get(i);
             if(StringUtils.isBlank(line)) {
                 continue;
             }
-            ToppingBuilder toppingBuilder = new ToppingBuilder(line);
-            Topping topping = toppingBuilder.createTopping();
-            order.getToppings().add(topping);
+            PizzaBuilder pizzaBuilder = new PizzaBuilder(line);
+            Pizza pizza = pizzaBuilder.createPizza();
+            order.getPizzas().add(pizza);
         }
     }
 

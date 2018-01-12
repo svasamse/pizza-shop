@@ -3,14 +3,14 @@ package com.example.pizza_shop.model;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class Topping {
+public class Pizza {
 
     private static final String DATE_PATTERN = "MM/dd/yyyy hh:mm a";
 
     private final String name;
     private final Date addedOn;
 
-    public Topping(String name, Date addedOn) {
+    public Pizza(String name, Date addedOn) {
         this.name = name;
         this.addedOn = addedOn;
     }
