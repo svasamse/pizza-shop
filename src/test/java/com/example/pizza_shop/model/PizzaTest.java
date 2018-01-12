@@ -15,7 +15,7 @@ public class PizzaTest {
         pizza = new Pizza("bread ", new Date(1477491887L));
 
         //act
-        String actual = pizza.toHumanReadableFormat();
+        final String actual = pizza.toHumanReadableFormat();
 
         assertThat(actual).containsPattern("bread 01/17/1970 ..:.. (AM|PM)");
     }
@@ -25,7 +25,7 @@ public class PizzaTest {
         pizza = new Pizza("bread ", null);
 
         //act
-        String actual = pizza.toHumanReadableFormat();
+        final String actual = pizza.toHumanReadableFormat();
 
         assertThat(actual).isEqualTo("bread ");
     }

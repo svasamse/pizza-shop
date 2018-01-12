@@ -9,21 +9,21 @@ import java.io.IOException;
 
 public class App {
 
-    public static void main(String... args) throws IOException {
+    public static void main(final String... args) throws IOException {
         if(StringUtils.isBlank(System.getProperty("orderInputFile"))) {
-            printUsage("ERROR: Input file not specified.");
+            printUsage();
             return;
         }
-        OrderService orderService = new OrderService();
-        Order order = orderService.readOrder();
-        String fileName = orderService.writeOrder(order);
+        final OrderService orderService = new OrderService();
+        final Order order = orderService.readOrder();
+        final String fileName = orderService.writeOrder(order);
         System.out.println("Finished generating the file.");
         System.out.println("Path: " + new File(fileName).getAbsoluteFile());
     }
 
-    private static void printUsage(String reason) {
+    private static void printUsage() {
         System.err.println("--------------------------------------");
-        System.err.println(reason);
+        System.err.println("ERROR: Input file not specified.");
         System.err.println("Usage: java -jar pizza-shop.jar -DorderInputFile=<path-to-order-file> [-DorderOutputFile=output.txt]");
         System.err.println("--------------------------------------");
     }

@@ -22,7 +22,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class OrderServiceTest {
 
     private static final String OUTPUT_FILE = "target/ordered.txt";
-    private static final String INPUT_FILE = "src/test/resources/sample_data_unnordered.txt";
+    private static final String INPUT_FILE = "src/test/resources/sample_data_unordered.txt";
 
     private OrderService orderService;
 
@@ -44,7 +44,7 @@ public class OrderServiceTest {
     @Test
     public void readOrder() throws Exception {
         //act
-        Order actual = orderService.readOrder();
+        final Order actual = orderService.readOrder();
 
         assertThat(actual.getHeader()).isEqualTo("Order\t\ttime");
         assertThat(actual.getPizzas()).hasSize(9);
@@ -61,7 +61,7 @@ public class OrderServiceTest {
 
     @Test(expected = InvalidFileException.class)
     public void readOrderWhenContentIsEmpty() throws Exception {
-        String content = "";
+        final String content = "";
 
         //act
         orderService.readOrder(new StringReader(content));
@@ -69,7 +69,7 @@ public class OrderServiceTest {
 
     @Test(expected = InvalidFileException.class)
     public void readOrderWhenOnlyHeaderIsPresent() throws Exception {
-        String content = "Order\t\ttime\n";
+        final String content = "Order\t\ttime\n";
 
         //act
         orderService.readOrder(new StringReader(content));
@@ -87,19 +87,19 @@ public class OrderServiceTest {
 
     @Test
     public void writeOrder() throws Exception {
-        Order order = new Order("header");
-        StringWriter writer = new StringWriter();
+        final Order order = new Order("header");
+        final StringWriter writer = new StringWriter();
 
-        Pizza veggie = new PizzaBuilder("Veggie\t\t1474295087").createPizza();
+        final Pizza veggie = new PizzaBuilder("Veggie\t\t1474295087").createPizza();
         order.getPizzas().add(veggie);
 
-        Pizza meat = new PizzaBuilder("Meat\t\t1506176687").createPizza();
+        final Pizza meat = new PizzaBuilder("Meat\t\t1506176687").createPizza();
         order.getPizzas().add(meat);
 
         //act
         orderService.writeOrder(order, writer);
 
-        String[] lines = writer.toString().split(System.lineSeparator());
+        final String[] lines = writer.toString().split(System.lineSeparator());
 
         assertThat(lines).hasSize(3);
         assertThat(lines[0]).isEqualTo("header");
@@ -109,18 +109,18 @@ public class OrderServiceTest {
 
     @Test
     public void writeOrderToFile() throws Exception {
-        Order order = new Order("header");
+        final Order order = new Order("header");
 
-        Pizza veggie = new PizzaBuilder("Veggie\t\t1474295087").createPizza();
+        final Pizza veggie = new PizzaBuilder("Veggie\t\t1474295087").createPizza();
         order.getPizzas().add(veggie);
 
-        Pizza meat = new PizzaBuilder("Meat\t\t1506176687").createPizza();
+        final Pizza meat = new PizzaBuilder("Meat\t\t1506176687").createPizza();
         order.getPizzas().add(meat);
 
         //act
-        String actual = orderService.writeOrder(order);
+        final String actual = orderService.writeOrder(order);
 
-        List<String> lines = FileUtils.readLines(new File(OUTPUT_FILE), StandardCharsets.UTF_8);
+        final List<String> lines = FileUtils.readLines(new File(OUTPUT_FILE), StandardCharsets.UTF_8);
 
         assertThat(lines).hasSize(3);
         assertThat(actual).isEqualTo(OUTPUT_FILE);

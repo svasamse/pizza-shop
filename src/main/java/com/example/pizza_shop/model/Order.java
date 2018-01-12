@@ -6,9 +6,9 @@ import java.util.List;
 public class Order {
 
     private final String header;
-    private List<Pizza> pizzas = new ArrayList<Pizza>(0);
+    private final List<Pizza> pizzas = new ArrayList<>(0);
 
-    public Order(String header) {
+    public Order(final String header) {
         this.header = header;
     }
 
@@ -20,7 +20,4 @@ public class Order {
         return pizzas;
     }
 
-    public void setPizzas(List<Pizza> pizzas) {
-        this.pizzas = pizzas;
-    }
 }

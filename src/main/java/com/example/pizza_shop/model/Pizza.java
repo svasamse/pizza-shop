@@ -10,7 +10,7 @@ public class Pizza {
     private final String name;
     private final Date addedOn;
 
-    public Pizza(String name, Date addedOn) {
+    public Pizza(final String name, final Date addedOn) {
         this.name = name;
         this.addedOn = addedOn;
     }
@@ -24,10 +24,10 @@ public class Pizza {
     }
 
     public String toHumanReadableFormat() {
-        StringBuilder builder = new StringBuilder();
+        final StringBuilder builder = new StringBuilder();
         builder.append(name);
         if (addedOn != null) {
-            SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_PATTERN);
+            final SimpleDateFormat dateFormat = new SimpleDateFormat(DATE_PATTERN);
             builder.append(dateFormat.format(addedOn));
         }
         return builder.toString();

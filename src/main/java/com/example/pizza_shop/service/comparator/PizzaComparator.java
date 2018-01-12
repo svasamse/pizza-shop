@@ -7,7 +7,7 @@ import org.apache.commons.lang3.builder.CompareToBuilder;
 import java.util.Comparator;
 
 public class PizzaComparator implements Comparator<Pizza>{
-    public int compare(Pizza lhs, Pizza rhs) {
+    public int compare(final Pizza lhs, final Pizza rhs) {
         if(lhs == null){
             return -1;
         }

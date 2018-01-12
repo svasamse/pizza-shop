@@ -17,17 +17,17 @@ import java.util.List;
 public class OrderService {
 
     public Order readOrder() throws IOException {
-        String orderInputFile = System.getProperty("orderInputFile");
-        Reader inputStream = new FileReader(orderInputFile);
+        final String orderInputFile = System.getProperty("orderInputFile");
+        final Reader inputStream = new FileReader(orderInputFile);
         return readOrder(inputStream);
     }
 
-    public Order readOrder(Reader reader) throws IOException {
-        List<String> items = IOUtils.readLines(reader);
+    public Order readOrder(final Reader reader) throws IOException {
+        final List<String> items = IOUtils.readLines(reader);
         if(CollectionUtils.isEmpty(items)) {
             throw new InvalidFileException("File is empty");
         }
-        Order order = new Order(items.get(0));
+        final Order order = new Order(items.get(0));
         addPizzas(items, order);
         if(CollectionUtils.isEmpty(order.getPizzas())) {
             throw new InvalidFileException("No pizzas present");
@@ -35,35 +35,35 @@ public class OrderService {
         return order;
     }
 
-    public String writeOrder(Order order) throws IOException {
-        String orderOutputFile = System.getProperty("orderOutputFile", "output.txt");
+    public String writeOrder(final Order order) throws IOException {
+        final String orderOutputFile = System.getProperty("orderOutputFile", "output.txt");
         writeOrder(order, new FileWriter(orderOutputFile));
         return orderOutputFile;
     }
 
-    public void writeOrder(Order order, Writer writer) throws IOException {
+    public void writeOrder(final Order order, final Writer writer) throws IOException {
         if(order == null || writer == null) {
             throw new IllegalArgumentException(MessageFormat.format("Arguments cannot be null; Order: [{0}], Writer: [{1}]", order, writer));
         }
 
         try (BufferedWriter bufferedWriter = new BufferedWriter(writer); PrintWriter printWriter = new PrintWriter(bufferedWriter)) {
             printWriter.println(order.getHeader());
-            List<Pizza> pizzas = order.getPizzas();
+            final List<Pizza> pizzas = order.getPizzas();
             Collections.sort(pizzas, new PizzaComparator());
-            for (Pizza pizza : pizzas) {
+            for (final Pizza pizza : pizzas) {
                 printWriter.println(pizza.toHumanReadableFormat());
             }
         }
     }
 
-    private void addPizzas(List<String> items, Order order) {
+    private void addPizzas(final List<String> items, final Order order) {
         for (int i = 1; i < items.size(); i++) {
-            String line = items.get(i);
+            final String line = items.get(i);
             if(StringUtils.isBlank(line)) {
                 continue;
             }
-            PizzaBuilder pizzaBuilder = new PizzaBuilder(line);
-            Pizza pizza = pizzaBuilder.createPizza();
+            final PizzaBuilder pizzaBuilder = new PizzaBuilder(line);
+            final Pizza pizza = pizzaBuilder.createPizza();
             order.getPizzas().add(pizza);
         }
     }

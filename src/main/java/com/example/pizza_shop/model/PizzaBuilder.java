@@ -7,23 +7,23 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class PizzaBuilder {
-    private String item;
+    private final String item;
 
-    public PizzaBuilder(String item) {
+    public PizzaBuilder(final String item) {
         if(item == null) {
-            throw new InvalidItemException(item);
+            throw new InvalidItemException(null);
         }
         this.item = item;
     }
 
     public Pizza createPizza() {
-        Pattern pattern = Pattern.compile("(.+?)(\\d+)");
-        Matcher matcher = pattern.matcher(item);
-        boolean matches = matcher.matches();
+        final Pattern pattern = Pattern.compile("(.+?)(\\d+)");
+        final Matcher matcher = pattern.matcher(item);
+        final boolean matches = matcher.matches();
         if(!matches) {
             throw new InvalidItemException(item);
         }
-        Date timestamp = new Date(Long.valueOf(matcher.group(2)));
+        final Date timestamp = new Date(Long.valueOf(matcher.group(2)));
         return new Pizza(matcher.group(1), timestamp);
     }
 }

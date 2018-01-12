@@ -22,87 +22,87 @@ public class PizzaComparatorTest {
 
     @Test
     public void compareWhenLhsIsNull() throws Exception {
-        int actual = comparator.compare(null, new Pizza("pizza", now));
+        final int actual = comparator.compare(null, new Pizza("pizza", now));
 
         assertThat(actual).isEqualTo(-1);
     }
 
     @Test
     public void compareWhenRhsIsNull() throws Exception {
-        int actual = comparator.compare(new Pizza("pizza", now), null);
+        final int actual = comparator.compare(new Pizza("pizza", now), null);
 
         assertThat(actual).isEqualTo(1);
     }
 
     @Test
     public void compareWhenLhsNameIsNull() throws Exception {
-        int actual = comparator.compare(new Pizza(null, now), new Pizza("pizza", now));
+        final int actual = comparator.compare(new Pizza(null, now), new Pizza("pizza", now));
 
         assertThat(actual).isEqualTo(-1);
     }
 
     @Test
     public void compareWhenRhsNameIsNull() throws Exception {
-        int actual = comparator.compare(new Pizza("pizza", now), new Pizza(null, now));
+        final int actual = comparator.compare(new Pizza("pizza", now), new Pizza(null, now));
 
         assertThat(actual).isEqualTo(1);
     }
 
     @Test
     public void compareWhenLhsDateIsNull() throws Exception {
-        int actual = comparator.compare(new Pizza("pizza", null), new Pizza("pizza", now));
+        final int actual = comparator.compare(new Pizza("pizza", null), new Pizza("pizza", now));
 
         assertThat(actual).isEqualTo(-1);
     }
 
     @Test
     public void compareWhenRhsDateIsNull() throws Exception {
-        int actual = comparator.compare(new Pizza("pizza", now), new Pizza("pizza", null));
+        final int actual = comparator.compare(new Pizza("pizza", now), new Pizza("pizza", null));
 
         assertThat(actual).isEqualTo(1);
     }
 
     @Test
     public void compareForDifferentNames() throws Exception {
-        Pizza veggie = new Pizza("veggie", now);
-        Pizza meat = new Pizza("meat", now);
+        final Pizza veggie = new Pizza("veggie", now);
+        final Pizza meat = new Pizza("meat", now);
 
         //act
-        int actual = comparator.compare(veggie, meat);
+        final int actual = comparator.compare(veggie, meat);
 
         assertThat(actual).isGreaterThan(0);
     }
 
     @Test
     public void compareForSameNamesWithDifferentDates() throws Exception {
-        Date oneHourAgo = DateUtils.addHours(now, -1);
-        Pizza veggie1 = new Pizza("veggie", oneHourAgo);
-        Pizza veggie2 = new Pizza("veggie", now);
+        final Date oneHourAgo = DateUtils.addHours(now, -1);
+        final Pizza veggie1 = new Pizza("veggie", oneHourAgo);
+        final Pizza veggie2 = new Pizza("veggie", now);
 
         //act
-        int actual = comparator.compare(veggie1, veggie2);
+        final int actual = comparator.compare(veggie1, veggie2);
 
         assertThat(actual).isLessThan(0);
     }
 
     @Test
     public void compareForSameNamesWithSameDates() throws Exception {
-        Pizza veggie1 = new Pizza("veggie", now);
-        Pizza veggie2 = new Pizza("veggie", now);
+        final Pizza veggie1 = new Pizza("veggie", now);
+        final Pizza veggie2 = new Pizza("veggie", now);
 
         //act
-        int actual = comparator.compare(veggie1, veggie2);
+        final int actual = comparator.compare(veggie1, veggie2);
 
         assertThat(actual).isEqualTo(0);
     }
 
     @Test
-    public void compareatorIsCaseInsensitive() throws Exception {
-        Pizza veggie = new Pizza("Veggie", now);
-        Pizza meat = new Pizza("meat", now);
+    public void comparatorIsCaseInsensitive() throws Exception {
+        final Pizza veggie = new Pizza("Veggie", now);
+        final Pizza meat = new Pizza("meat", now);
 
         //act
-        int actual = comparator.compare(veggie, meat);
+        final int actual = comparator.compare(veggie, meat);
 
         assertThat(actual).isGreaterThan(0);
     }

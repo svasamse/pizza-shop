@@ -1,6 +1,5 @@
 package com.example.pizza_shop;
 
-import com.example.pizza_shop.service.OrderService;
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
 import org.junit.Before;
@@ -12,7 +11,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppTest {
 
-    private static final String INPUT_FILE = "src/test/resources/sample_data_unnordered.txt";
+    private static final String INPUT_FILE = "src/test/resources/sample_data_unordered.txt";
     private static final String OUTPUT_FILE = "target/app.txt";
 
     @Before
