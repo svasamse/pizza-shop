@@ -95,4 +95,15 @@ public class PizzaComparatorTest {
 
         assertThat(actual).isEqualTo(0);
     }
+
+    @Test
+    public void compareatorIsCaseInsensitive() throws Exception {
+        Pizza veggie = new Pizza("Veggie", now);
+        Pizza meat = new Pizza("meat", now);
+
+        //act
+        int actual = comparator.compare(veggie, meat);
+
+        assertThat(actual).isGreaterThan(0);
+    }
 }
