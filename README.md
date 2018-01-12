@@ -2,11 +2,15 @@
 
 ## Problem statement
 Pizza shop receives order and saves them in a text file however they are not in correct order.
-The application will arrange the list in correct order. 
+The application will arrange the list in correct order.
+ 
+## Prerequisites
+JDK 7+
+
+Maven is optional as a wrapper is provided with the application
 
 ## Assumptions
 * The file should be in `UTF-8` format only
-* The program will be executed using Java 7 and over only
 * The items will be sorted based on the pizza name
     * When there are more than one pizza with the same name, then they will be ordered by the timestamp
 * The first line in the file will be considered as a header and will not be included for sorting
@@ -36,9 +40,10 @@ The process of sorting the pizzas is as follows.
 ## Running the program
 To build the project run the following command in the command line
 
-    $ mvn clean package
+    $ mvnw clean package
     
 The build will generate an executable jar file in the `target` directory which will need to be run as follows.
 
     $ java -jar pizza-shop.jar -DorderInputFile=<path-to-order-file> [-DorderOutputFile=output.txt]
 
+The system property `orderInputFile` is mandatory. The system property `orderOutputFile` is optional and will default to the value `output.txt`
