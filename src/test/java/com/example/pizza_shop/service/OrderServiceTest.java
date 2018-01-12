@@ -21,13 +21,13 @@ public class OrderServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        System.setProperty("orderFile", "src/test/resources/sample_data_unnordered.txt");
+        System.setProperty("orderInputFile", "src/test/resources/sample_data_unnordered.txt");
         orderService = new OrderService();
     }
 
     @After
     public void tearDown() throws Exception {
-        System.clearProperty("orderFile");
+        System.clearProperty("orderInputFile");
     }
 
     @Test
@@ -42,7 +42,7 @@ public class OrderServiceTest {
 
     @Test(expected = FileNotFoundException.class)
     public void readOrderWhenFileNotFound() throws Exception {
-        System.setProperty("orderFile", "non/existing.file");
+        System.setProperty("orderInputFile", "non/existing.file");
 
         //act
         orderService.readOrder();

@@ -17,8 +17,8 @@ import java.util.List;
 public class OrderService {
 
     public Order readOrder() throws IOException {
-        String orderFile = System.getProperty("orderFile");
-        Reader inputStream = new FileReader(orderFile);
+        String orderInputFile = System.getProperty("orderInputFile");
+        Reader inputStream = new FileReader(orderInputFile);
         return readOrder(inputStream);
     }
 
@@ -33,6 +33,10 @@ public class OrderService {
             throw new InvalidFileException("No toppings present");
         }
         return order;
+    }
+
+    public void writeOrder(Order order) {
+
     }
 
     public void writeOrder(Order order, Writer writer) throws IOException {
