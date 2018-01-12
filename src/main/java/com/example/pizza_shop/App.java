@@ -9,15 +9,19 @@ import java.io.IOException;
 
 public class App {
 
+    private static final String ORDER_INPUT_FILE = "orderInputFile";
+    private static final String ORDER_OUTPUT_FILE = "orderOutputFile";
+    private static final String DEFAULT_OUTPUT_FILE = "output.txt";
+
     public static void main(final String... args) throws IOException {
-        final String orderInputFile = System.getProperty("orderInputFile");
+        final String orderInputFile = System.getProperty(ORDER_INPUT_FILE);
         if (StringUtils.isBlank(orderInputFile)) {
             printUsage();
             return;
         }
         final OrderService orderService = new OrderService();
         final Order order = orderService.readOrder(orderInputFile);
-        final String orderOutputFile = System.getProperty("orderOutputFile", "output.txt");
+        final String orderOutputFile = System.getProperty(ORDER_OUTPUT_FILE, DEFAULT_OUTPUT_FILE);
         final String fileName = orderService.writeOrder(order, orderOutputFile);
         printSuccess(fileName);
     }
@@ -25,7 +29,7 @@ public class App {
     private static void printUsage() {
         System.err.println("--------------------------------------");
         System.err.println("ERROR: Input file not specified.");
-        System.err.println("Usage: java -jar pizza-shop.jar -DorderInputFile=<path-to-order-file> [-DorderOutputFile=output.txt]");
+        System.err.printf("Usage: java -jar pizza-shop.jar -D%s=<path-to-order-file> [-D%s=%s]%n", ORDER_INPUT_FILE, ORDER_OUTPUT_FILE, DEFAULT_OUTPUT_FILE);
         System.err.println("--------------------------------------");
     }
 
