@@ -22,6 +22,17 @@ The application will arrange the list in correct order.
     01/17/2018 11:53 AM
 ```
 
+## Design
+The application is broadly classified in to the following packages.
+* model - The data in the file is converted in to the classes defined in this package
+* service - All data manipulation logic will be handled by the class(es) defined in this package
+* exception - All application related exceptions are defined here
+
+The process of sorting the toppings is as follows.
+* Read the toppings related to the order from the given file and convert it into an `Order` object
+* Sort the collected toppings based on the name, and time the topping was added (in case the same topping has been added more than once)
+* The sorted toppings for the order will then be outputted to a file
+
 ## Running the program
 To build the project run the following command in the command line
 
