@@ -19,11 +19,8 @@ public class App {
             printUsage();
             return;
         }
-        final OrderService orderService = new OrderService();
-        final Order order = orderService.readOrder(orderInputFile);
-        final String orderOutputFile = System.getProperty(ORDER_OUTPUT_FILE, DEFAULT_OUTPUT_FILE);
-        final String fileName = orderService.writeOrder(order, orderOutputFile);
-        printSuccess(fileName);
+        final File outputFile = sortPizzasInOrderFile(orderInputFile);
+        printSuccess(outputFile);
     }
 
     private static void printUsage() {
@@ -33,11 +30,20 @@ public class App {
         System.err.println("--------------------------------------");
     }
 
-    private static void printSuccess(final String fileName) {
+    private static void printSuccess(final File outputFile) {
         System.out.println("--------------------------------------");
         System.out.println("Finished generating the file.");
-        System.out.println("Path: " + new File(fileName).getAbsoluteFile());
+        System.out.println("Path: " + outputFile.getAbsoluteFile());
         System.out.println("--------------------------------------");
+    }
+
+    private static File sortPizzasInOrderFile(String orderInputFile) throws IOException {
+        final OrderService orderService = new OrderService();
+        final Order order = orderService.readOrder(orderInputFile);
+        final String orderOutputFile = System.getProperty(ORDER_OUTPUT_FILE, DEFAULT_OUTPUT_FILE);
+        final File outputFile = new File(orderOutputFile);
+        orderService.writeOrder(order, outputFile);
+        return outputFile;
     }
 
 }

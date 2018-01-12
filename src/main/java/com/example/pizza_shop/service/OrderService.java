@@ -34,9 +34,8 @@ public class OrderService {
         return order;
     }
 
-    public String writeOrder(final Order order, final String orderOutputFile) throws IOException {
+    public void writeOrder(final Order order, final File orderOutputFile) throws IOException {
         writeOrder(order, new FileWriter(orderOutputFile));
-        return orderOutputFile;
     }
 
     public void writeOrder(final Order order, final Writer writer) throws IOException {

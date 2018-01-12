@@ -109,11 +109,10 @@ public class OrderServiceTest {
         order.getPizzas().add(meat);
 
         //act
-        final String actual = orderService.writeOrder(order, OUTPUT_FILE);
+        orderService.writeOrder(order, new File(OUTPUT_FILE));
 
         final List<String> lines = FileUtils.readLines(new File(OUTPUT_FILE), StandardCharsets.UTF_8);
 
         assertThat(lines).hasSize(3);
-        assertThat(actual).isEqualTo(OUTPUT_FILE);
     }
 }
