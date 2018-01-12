@@ -12,8 +12,8 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class AppTest {
 
-    public static final String INPUT_FILE = "src/test/resources/sample_data_unnordered.txt";
-    public static final String OUTPUT_FILE = "target/app.txt";
+    private static final String INPUT_FILE = "src/test/resources/sample_data_unnordered.txt";
+    private static final String OUTPUT_FILE = "target/app.txt";
 
     @Before
     public void setUp() throws Exception {
@@ -26,6 +26,7 @@ public class AppTest {
     public void tearDown() throws Exception {
         System.clearProperty("orderInputFile");
         System.clearProperty("orderOutputFile");
+        FileUtils.deleteQuietly(new File(OUTPUT_FILE));
     }
 
     @Test
@@ -36,6 +37,16 @@ public class AppTest {
         App.main();
 
         assertThat(new File(OUTPUT_FILE)).exists();
+    }
+
+    @Test
+    public void mainWithoutSpecifyingOrderInputFile() throws Exception {
+        System.clearProperty("orderInputFile");
+
+        //act
+        App.main();
+
+        assertThat(new File(OUTPUT_FILE)).doesNotExist();
     }
 
 }

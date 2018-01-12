@@ -40,6 +40,5 @@ To build the project run the following command in the command line
     
 The build will generate an executable jar file in the `target` directory which will need to be run as follows.
 
-    $ java -jar pizza-shop.jar -DorderInputFile=<path-to-order-file>
+    $ java -jar pizza-shop.jar -DorderInputFile=<path-to-order-file> [-DorderOutputFile=output.txt]
 
-The order input file is a mandatory parameter and the process will exit returning an error if it is not provided.

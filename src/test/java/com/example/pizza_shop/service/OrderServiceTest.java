@@ -21,13 +21,16 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 public class OrderServiceTest {
 
+    private static final String OUTPUT_FILE = "target/ordered.txt";
+    private static final String INPUT_FILE = "src/test/resources/sample_data_unnordered.txt";
+
     private OrderService orderService;
 
     @Before
     public void setUp() throws Exception {
-        System.setProperty("orderInputFile", "src/test/resources/sample_data_unnordered.txt");
-        System.setProperty("orderOutputFile", "target/ordered.txt");
-        FileUtils.forceMkdirParent(new File("target/ordered.txt"));
+        System.setProperty("orderInputFile", INPUT_FILE);
+        System.setProperty("orderOutputFile", OUTPUT_FILE);
+        FileUtils.forceMkdirParent(new File(OUTPUT_FILE));
         orderService = new OrderService();
     }
 
@@ -35,6 +38,7 @@ public class OrderServiceTest {
     public void tearDown() throws Exception {
         System.clearProperty("orderInputFile");
         System.clearProperty("orderOutputFile");
+        FileUtils.deleteQuietly(new File(OUTPUT_FILE));
     }
 
     @Test
@@ -114,10 +118,11 @@ public class OrderServiceTest {
         order.getPizzas().add(meat);
 
         //act
-        orderService.writeOrder(order);
+        String actual = orderService.writeOrder(order);
 
-        List<String> lines = FileUtils.readLines(new File("target/ordered.txt"), StandardCharsets.UTF_8);
+        List<String> lines = FileUtils.readLines(new File(OUTPUT_FILE), StandardCharsets.UTF_8);
 
         assertThat(lines).hasSize(3);
+        assertThat(actual).isEqualTo(OUTPUT_FILE);
     }
 }
