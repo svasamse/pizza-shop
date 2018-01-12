@@ -1,6 +1,7 @@
 package com.example.pizza_shop.service.comparator;
 
 import com.example.pizza_shop.model.Topping;
+import org.apache.commons.lang3.builder.CompareToBuilder;
 
 import java.util.Comparator;
 
@@ -12,10 +13,9 @@ public class ToppingComparator implements Comparator<Topping>{
         if(rhs == null){
             return 1;
         }
-        int result = lhs.getName().compareTo(rhs.getName());
-        if(result == 0){
-            return lhs.getAddedOn().compareTo(rhs.getAddedOn());
-        }
-        return result;
+        return new CompareToBuilder()
+                .append(lhs.getName(), rhs.getName())
+                .append(lhs.getAddedOn(), rhs.getAddedOn())
+                .toComparison();
     }
 }
