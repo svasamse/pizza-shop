@@ -35,8 +35,9 @@ public class OrderService {
         return order;
     }
 
-    public void writeOrder(Order order) {
-
+    public void writeOrder(Order order) throws IOException {
+        String orderOutputFile = System.getProperty("orderOutputFile", "output.txt");
+        writeOrder(order, new FileWriter(orderOutputFile));
     }
 
     public void writeOrder(Order order, Writer writer) throws IOException {
