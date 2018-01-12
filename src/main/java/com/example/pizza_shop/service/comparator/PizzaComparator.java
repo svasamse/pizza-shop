@@ -16,7 +16,7 @@ public class PizzaComparator implements Comparator<Pizza>{
         }
         return new CompareToBuilder()
                 .append(StringUtils.lowerCase(lhs.getName()), StringUtils.lowerCase(rhs.getName()))
-                .append(lhs.getAddedOn(), rhs.getAddedOn())
+                .append(lhs.getOrderedOn(), rhs.getOrderedOn())
                 .toComparison();
     }
 }

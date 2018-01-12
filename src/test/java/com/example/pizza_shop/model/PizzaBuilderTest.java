@@ -24,7 +24,7 @@ public class PizzaBuilderTest {
         final Pizza pizza = pizzaBuilder.createPizza();
 
         assertThat(pizza.getName()).isEqualTo("p1zza\t\t");
-        assertThat(pizza.getAddedOn().getTime()).isEqualTo(1477491887L);
+        assertThat(pizza.getOrderedOn().getTime()).isEqualTo(1477491887L);
     }
 
     @Test(expected = InvalidItemException.class)

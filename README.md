@@ -35,7 +35,7 @@ The application is broadly classified in to the following packages.
 
 The process of sorting the pizzas is as follows.
 * Read the pizzas related to the order from the given file and convert it into an `Order` object
-* Sort the collected pizzas based on the name, and time the pizza was added (in case the same pizza has been added more than once)
+* Sort the collected pizzas based on the name, and time the pizza was ordered (in case the same pizza has been ordered more than once)
 * The sorted pizzas for the order will then be outputted to a file in the following format
 ```
 Order		time
