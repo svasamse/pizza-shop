@@ -9,8 +9,8 @@
     <name>Pizza Order Sorting</name>
 
     <properties>
-        <java.src.version>1.6</java.src.version>
-        <java.target.version>1.6</java.target.version>
+        <java.src.version>1.7</java.src.version>
+        <java.target.version>1.7</java.target.version>
     </properties>
 
     <dependencies>
