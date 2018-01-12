@@ -12,14 +12,14 @@ import java.io.StringReader;
 import static org.assertj.core.api.Assertions.assertThat;
 
 
-public class OrderSorterTest {
+public class OrderServiceTest {
 
-    private OrderSorter orderSorter;
+    private OrderService orderService;
 
     @Before
     public void setUp() throws Exception {
         System.setProperty("orderFile", "src/test/resources/sample_data_unnordered.txt");
-        orderSorter = new OrderSorter();
+        orderService = new OrderService();
     }
 
     @After
@@ -30,7 +30,7 @@ public class OrderSorterTest {
     @Test
     public void readOrder() throws Exception {
         //act
-        Order actual = orderSorter.readOrder();
+        Order actual = orderService.readOrder();
 
         assertThat(actual.getHeader()).isEqualTo("Order\t\ttime");
         assertThat(actual.getToppings()).hasSize(9);
@@ -42,7 +42,7 @@ public class OrderSorterTest {
         System.setProperty("orderFile", "non/existing.file");
 
         //act
-        orderSorter.readOrder();
+        orderService.readOrder();
     }
 
     @Test(expected = InvalidFileException.class)
@@ -50,7 +50,7 @@ public class OrderSorterTest {
         String content = "";
 
         //act
-        orderSorter.readOrder(new StringReader(content));
+        orderService.readOrder(new StringReader(content));
     }
 
     @Test(expected = InvalidFileException.class)
@@ -58,6 +58,6 @@ public class OrderSorterTest {
         String content = "Order\t\ttime\n";
 
         //act
-        orderSorter.readOrder(new StringReader(content));
+        orderService.readOrder(new StringReader(content));
     }
 }

@@ -10,7 +10,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.io.*;
 import java.util.List;
 
-public class OrderSorter {
+public class OrderService {
 
     public Order readOrder() throws IOException {
         String orderFile = System.getProperty("orderFile");
@@ -18,8 +18,8 @@ public class OrderSorter {
         return readOrder(inputStream);
     }
 
-    public Order readOrder(Reader inputStream) throws IOException {
-        List<String> items = IOUtils.readLines(inputStream);
+    public Order readOrder(Reader reader) throws IOException {
+        List<String> items = IOUtils.readLines(reader);
         if(items.isEmpty()) {
             throw new InvalidFileException("File is empty");
         }
