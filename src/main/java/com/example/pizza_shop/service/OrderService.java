@@ -4,6 +4,7 @@ import com.example.pizza_shop.exception.InvalidFileException;
 import com.example.pizza_shop.model.Order;
 import com.example.pizza_shop.model.Topping;
 import com.example.pizza_shop.model.ToppingBuilder;
+import org.apache.commons.collections4.CollectionUtils;
 import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 
@@ -20,12 +21,12 @@ public class OrderService {
 
     public Order readOrder(Reader reader) throws IOException {
         List<String> items = IOUtils.readLines(reader);
-        if(items.isEmpty()) {
+        if(CollectionUtils.isEmpty(items)) {
             throw new InvalidFileException("File is empty");
         }
         Order order = new Order(items.get(0));
         addToppings(items, order);
-        if(order.getToppings().isEmpty()) {
+        if(CollectionUtils.isEmpty(order.getToppings())) {
             throw new InvalidFileException("No toppings present");
         }
         return order;
