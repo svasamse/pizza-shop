@@ -29,7 +29,7 @@ public class PizzaBuilderTest {
 
     @Test(expected = InvalidItemException.class)
     public void createPizzaWhenLineItemIsNotValid() throws Exception {
-        final String item = "p1zza  1477491887invalidtextaftertimestamp";
+        final String item = "p1zza  1477491887 invalid text after timestamp";
 
         pizzaBuilder = new PizzaBuilder(item);
 

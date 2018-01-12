@@ -16,8 +16,7 @@ import java.util.List;
 
 public class OrderService {
 
-    public Order readOrder() throws IOException {
-        final String orderInputFile = System.getProperty("orderInputFile");
+    public Order readOrder(final String orderInputFile) throws IOException {
         final Reader inputStream = new FileReader(orderInputFile);
         return readOrder(inputStream);
     }
@@ -35,8 +34,7 @@ public class OrderService {
         return order;
     }
 
-    public String writeOrder(final Order order) throws IOException {
-        final String orderOutputFile = System.getProperty("orderOutputFile", "output.txt");
+    public String writeOrder(final Order order, final String orderOutputFile) throws IOException {
         writeOrder(order, new FileWriter(orderOutputFile));
         return orderOutputFile;
     }

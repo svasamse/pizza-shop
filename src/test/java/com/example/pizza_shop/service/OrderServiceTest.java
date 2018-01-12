@@ -9,10 +9,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
 
@@ -28,23 +25,19 @@ public class OrderServiceTest {
 
     @Before
     public void setUp() throws Exception {
-        System.setProperty("orderInputFile", INPUT_FILE);
-        System.setProperty("orderOutputFile", OUTPUT_FILE);
         FileUtils.forceMkdirParent(new File(OUTPUT_FILE));
         orderService = new OrderService();
     }
 
     @After
     public void tearDown() throws Exception {
-        System.clearProperty("orderInputFile");
-        System.clearProperty("orderOutputFile");
         FileUtils.deleteQuietly(new File(OUTPUT_FILE));
     }
 
     @Test
     public void readOrder() throws Exception {
         //act
-        final Order actual = orderService.readOrder();
+        final Order actual = orderService.readOrder(INPUT_FILE);
 
         assertThat(actual.getHeader()).isEqualTo("Order\t\ttime");
         assertThat(actual.getPizzas()).hasSize(9);
@@ -53,10 +46,8 @@ public class OrderServiceTest {
 
     @Test(expected = FileNotFoundException.class)
     public void readOrderWhenFileNotFound() throws Exception {
-        System.setProperty("orderInputFile", "non/existing.file");
-
         //act
-        orderService.readOrder();
+        orderService.readOrder("non/existing.file");
     }
 
     @Test(expected = InvalidFileException.class)
@@ -82,7 +73,7 @@ public class OrderServiceTest {
 
     @Test(expected = IllegalArgumentException.class)
     public void writeOrderWhenWriterIsNull() throws Exception {
-        orderService.writeOrder(new Order("header"), null);
+        orderService.writeOrder(new Order("header"), (Writer) null);
     }
 
     @Test
@@ -118,7 +109,7 @@ public class OrderServiceTest {
         order.getPizzas().add(meat);
 
         //act
-        final String actual = orderService.writeOrder(order);
+        final String actual = orderService.writeOrder(order, OUTPUT_FILE);
 
         final List<String> lines = FileUtils.readLines(new File(OUTPUT_FILE), StandardCharsets.UTF_8);
 
