@@ -35,6 +35,34 @@ public class ToppingComparatorTest {
     }
 
     @Test
+    public void compareWhenLhsNameIsNull() throws Exception {
+        int actual = comparator.compare(new Topping(null, now), new Topping("topping", now));
+
+        assertThat(actual).isEqualTo(-1);
+    }
+
+    @Test
+    public void compareWhenRhsNameIsNull() throws Exception {
+        int actual = comparator.compare(new Topping("topping", now), new Topping(null, now));
+
+        assertThat(actual).isEqualTo(1);
+    }
+
+    @Test
+    public void compareWhenLhsDateIsNull() throws Exception {
+        int actual = comparator.compare(new Topping("topping", null), new Topping("topping", now));
+
+        assertThat(actual).isEqualTo(-1);
+    }
+
+    @Test
+    public void compareWhenRhsDateIsNull() throws Exception {
+        int actual = comparator.compare(new Topping("topping", now), new Topping("topping", null));
+
+        assertThat(actual).isEqualTo(1);
+    }
+
+    @Test
     public void compareForDifferentToppingNames() throws Exception {
         Topping veggie = new Topping("veggie", now);
         Topping meat = new Topping("meat", now);
