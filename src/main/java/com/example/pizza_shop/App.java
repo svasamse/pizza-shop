@@ -11,7 +11,7 @@ public class App {
 
     public static void main(final String... args) throws IOException {
         final String orderInputFile = System.getProperty("orderInputFile");
-        if(StringUtils.isBlank(orderInputFile)) {
+        if (StringUtils.isBlank(orderInputFile)) {
             printUsage();
             return;
         }

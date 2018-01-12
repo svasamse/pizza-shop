@@ -6,12 +6,12 @@ import org.apache.commons.lang3.builder.CompareToBuilder;
 
 import java.util.Comparator;
 
-public class PizzaComparator implements Comparator<Pizza>{
+public class PizzaComparator implements Comparator<Pizza> {
     public int compare(final Pizza lhs, final Pizza rhs) {
-        if(lhs == null){
+        if (lhs == null) {
             return -1;
         }
-        if(rhs == null){
+        if (rhs == null) {
             return 1;
         }
         return new CompareToBuilder()

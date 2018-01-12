@@ -10,7 +10,7 @@ public class PizzaBuilder {
     private final String item;
 
     public PizzaBuilder(final String item) {
-        if(item == null) {
+        if (item == null) {
             throw new InvalidItemException(null);
         }
         this.item = item;
@@ -20,7 +20,7 @@ public class PizzaBuilder {
         final Pattern pattern = Pattern.compile("(.+?)(\\d+)");
         final Matcher matcher = pattern.matcher(item);
         final boolean matches = matcher.matches();
-        if(!matches) {
+        if (!matches) {
             throw new InvalidItemException(item);
         }
         final Date timestamp = new Date(Long.valueOf(matcher.group(2)));
